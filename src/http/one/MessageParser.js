@@ -89,9 +89,7 @@ export default class MessageParser {
         Must(rawFields.length); // our caller requires CRLF at the headers end
         Must(!rawFields.pop().length); // the non-field after the last CRLF
         for (let rawField of rawFields) {
-            let field = this.parseField(rawField + "\n");
-            Must(field);
-            header.fields.push(field);
+            header.fields.push(this.parseField(rawField + "\n"));
         }
 
         if (!header.fields.length)
